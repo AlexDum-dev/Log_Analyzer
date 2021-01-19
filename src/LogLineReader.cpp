@@ -38,14 +38,15 @@ string LogLineReader::GetDateTime()
     return dateTime;
 }
 
-typeHttp LogLineReader::GetTypeRequest()
+/*typeHttp LogLineReader::GetTypeRequest()
 {
     return  typeRequest;
 }
+*/
 
-string LogLineReader::GetUrl()
+string LogLineReader::GetCible()
 {
-    return url;
+    return cible;
 }
 
 int LogLineReader::GetStatus()
@@ -81,15 +82,17 @@ string LogLineReader::SetDateTime()
     return dateTime;
 }
 
-typeHttp LogLineReader::SetTypeRequest()
+/*typeHttp LogLineReader::SetTypeRequest()
 {
     return  typeRequest;
 }
+*/
 
-string LogLineReader::SetUrl()
+/*string LogLineReader::SetUrl()
 {
-    return url;
+    return cible;
 }
+*/
 
 int LogLineReader::SetStatus()
 {
@@ -114,35 +117,59 @@ string LogLineReader::SetUserAuthentification()
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Xxx & Xxx::operator = ( const Xxx & unXxx )
+istream & operator >> (istream & in, LogLineReader & unLogLineReader )
 // Algorithme :
 //
 {
-} //----- Fin de operator =
+    string tmp;
+    string urlLocal = "intranet-if.insa-lyon.fr";
+    getline(in,unLogLineReader.ip, ' ');
+    getline(in,tmp,'[');
+    getline(in,unLogLineReader.dateTime, ']');
+    in.get();
+    in.get();
+    getline(in,unLogLineReader.typeRequest, ' ');
+    getline(in,unLogLineReader.cible, ' ');
+    getline(in,tmp, ' ');
+    getline(in,tmp, ' ');
+    unLogLineReader.status = stoi(tmp);
+    getline(in,tmp, '"');
+    unLogLineReader.quantity = stoi(tmp);
+    getline(in, tmp, '/');
+    getline(in, tmp, '/');
+    getline(in, tmp, '/');
+    if(tmp == urlLocal)
+    {
+        getline(in, unLogLineReader.referer, '"');
+        unLogLineReader.referer = "/" + unLogLineReader.referer; 
+    } else 
+    {
+        tmp = "http://" + tmp; //l'adresse n'est pas locale on veut garder tout l'url
+        string tmp2;
+        getline(in,tmp2,'"');
+        tmp = tmp + tmp2;
+        unLogLineReader.referer = tmp;
+    }
+    in.get();
+    in.get();
+    getline(in, unLogLineReader.userAthentification, '"');
+    in.get(); //consomme le retour à la ligne
+}
 
 
-//-------------------------------------------- Constructeurs - destructeur
-Xxx::Xxx ( const Xxx & unXxx )
+
+
+LogLineReader::LogLineReader ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
+    cout << "Appel au constructeur de <LogLineReader>" << endl;
 #endif
-} //----- Fin de Xxx (constructeur de copie)
+} //----- Fin de LogLineReader
 
 
-Xxx::Xxx ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
-#endif
-} //----- Fin de Xxx
-
-
-Xxx::~Xxx ( )
+LogLineReader::~LogLineReader ( )
 // Algorithme :
 //
 {

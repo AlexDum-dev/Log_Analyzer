@@ -11,25 +11,20 @@
 #define LOGLINEREADER_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <string>;
+#include <string>
 using namespace std;
 
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
-typedef enum typeHttp typeHttp;
 
-enum typeHttp
-{
-    GET,POST,OPTIONS,PUT,HEAD, DELETE, PATCH
-};
 //------------------------------------------------------------------------
 // Rôle de la classe <LogLineReader>
 //
 //
 //------------------------------------------------------------------------
 
-class LogLineReader : 
+class LogLineReader
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -43,8 +38,8 @@ public:
 
     string GetIp();
     string GetDateTime();
-    typeHttp GetTypeRequest();
-    string GetUrl();
+    string GetTypeRequest();
+    string GetCible();
     int GetStatus();
     int GetQuantity();
     string GetReferer();
@@ -52,7 +47,7 @@ public:
 
     string SetIp();
     string SetDateTime();
-    typeHttp SetTypeRequest();
+    //typeHttp SetTypeRequest();
     string SetUrl();
     int SetStatus();
     int SetQuantity();
@@ -62,7 +57,7 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Xxx & operator = ( const Xxx & unXxx );
+     friend istream & operator >> (istream & in, LogLineReader & unLogLineReader);
     // Mode d'emploi :
     //
     // Contrat :
@@ -70,19 +65,14 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Xxx ( const Xxx & unXxx );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
-    Xxx ( );
+    LogLineReader();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Xxx ( );
+    virtual ~LogLineReader ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -96,10 +86,8 @@ protected:
 //----------------------------------------------------- Attributs protégés
     string ip;
     string dateTime;
-    typeHttp typeRequest;
-    string url;
-    int satus;
-    int quantity;
+    string typeRequest;
+    string cible;
     int status;
     int quantity;
     string referer;
