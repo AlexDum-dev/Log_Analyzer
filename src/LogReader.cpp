@@ -11,11 +11,13 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
+#include <string>
 #include <iostream>
+#include <cstring>
 
 //------------------------------------------------------ Include personnel
 #include "LogReader.h"
+#include "LogLineReader.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -27,28 +29,59 @@ using namespace std;
 // Algorithme :
 //
 
-LogLineReader LogReader::NextLine(){
-	
-	
+LogLineReader LogReader::NextLine()
+{
+    LogLineReader res;
+    string tmp;
+    string urlLocal = "intranet-if.insa-lyon.fr";
+    std::getline(*this,tmp, ' ');
+    res.SetIp(tmp);
+    std::getline(*this,tmp,'[');
+    std::getline(*this,tmp, ']');
+    res.SetDateTime(tmp);
+    (*this).get();
+    (*this).get();
+    std::getline(*this,tmp, ' ');
+    res.SetTypeRequest(tmp);
+    std::getline(*this,tmp, ' ');
+    res.SetCible(tmp);
+    std::getline(*this,tmp, ' ');
+    std::getline(*this,tmp, ' ');
+    res.SetStatus(stoi(tmp));
+    std::getline(*this,tmp, '"');
+    res.SetQuantity(stoi(tmp));
+    std::getline(*this, tmp, '/');
+    std::getline(*this, tmp, '/');
+    std::getline(*this, tmp, '/');
+    if(tmp == urlLocal)
+    {
+        string ref;
+        std::getline(*this, ref, '"');
+        res.SetReferer("/" + ref);
+    } else 
+    {
+        tmp = "http://" + tmp; //l'adresse n'est pas locale on veut garder tout l'url
+        string tmp2;
+        std::getline(*this,tmp2,'"');
+        tmp = tmp + tmp2;
+        res.SetReferer(tmp);
+    }
+    (*this).get();
+    (*this).get();
+    std::getline(*this, tmp, '"');
+    res.SetUserAuthentification(tmp);
+    (*this).get(); //consomme le retour à la ligne
+
+    return res;
 }
 
-
-// //----- Fin de Méthode
-
-
+	
 //-------------------------------------------- Constructeurs - destructeur
-// Algorithme :
-//
+
+LogReader::LogReader(string nomFichierLog) : ifstream(nomFichierLog.c_str())
 {
 #ifdef MAP
     cout << "Appel au constructeur de <LogReader>" << endl;
-     
-    LogReader::LogReader(char * nomFichierLog) : ifstream(nomFichierLog){
-		 
-
-	
-	 }
-    
 #endif
 } //----- Fin de Xxx
 

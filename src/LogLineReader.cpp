@@ -22,11 +22,6 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 string LogLineReader::GetIp()
 {
@@ -72,91 +67,48 @@ string LogLineReader::GetUserAuthentification()
 
 //Setters : 
 
-string LogLineReader::SetIp()
+void LogLineReader::SetIp(string uneip)
 {
-    return ip;
+    ip = uneip;
 }
 
-string LogLineReader::SetDateTime()
+void LogLineReader::SetDateTime(string uneDate)
 {
-    return dateTime;
+    dateTime = uneDate;
 }
 
-/*typeHttp LogLineReader::SetTypeRequest()
+void LogLineReader::SetTypeRequest(string uneTypeRequest)
 {
-    return  typeRequest;
-}
-*/
-
-/*string LogLineReader::SetUrl()
-{
-    return cible;
-}
-*/
-
-int LogLineReader::SetStatus()
-{
-    return status;
-}
-
-int LogLineReader::SetQuantity()
-{
-    return quantity;
-
-}
-
-string LogLineReader::SetReferer()
-{
-    return referer;
-}
-
-string LogLineReader::SetUserAuthentification()
-{
-    return userAthentification;
+    typeRequest = uneTypeRequest;
 }
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-istream & operator >> (istream & in, LogLineReader & unLogLineReader )
-// Algorithme :
-//
+void LogLineReader::SetCible(string uneCible)
 {
-    string tmp;
-    string urlLocal = "intranet-if.insa-lyon.fr";
-    getline(in,unLogLineReader.ip, ' ');
-    getline(in,tmp,'[');
-    getline(in,unLogLineReader.dateTime, ']');
-    in.get();
-    in.get();
-    getline(in,unLogLineReader.typeRequest, ' ');
-    getline(in,unLogLineReader.cible, ' ');
-    getline(in,tmp, ' ');
-    getline(in,tmp, ' ');
-    unLogLineReader.status = stoi(tmp);
-    getline(in,tmp, '"');
-    unLogLineReader.quantity = stoi(tmp);
-    getline(in, tmp, '/');
-    getline(in, tmp, '/');
-    getline(in, tmp, '/');
-    if(tmp == urlLocal)
-    {
-        getline(in, unLogLineReader.referer, '"');
-        unLogLineReader.referer = "/" + unLogLineReader.referer; 
-    } else 
-    {
-        tmp = "http://" + tmp; //l'adresse n'est pas locale on veut garder tout l'url
-        string tmp2;
-        getline(in,tmp2,'"');
-        tmp = tmp + tmp2;
-        unLogLineReader.referer = tmp;
-    }
-    in.get();
-    in.get();
-    getline(in, unLogLineReader.userAthentification, '"');
-    in.get(); //consomme le retour à la ligne
+    cible = uneCible;
 }
 
 
+void LogLineReader::SetStatus(int unStatus)
+{
+    status = unStatus;
+}
+
+void LogLineReader::SetQuantity(int uneQuantity)
+{
+    quantity = uneQuantity;
+
+}
+
+void LogLineReader::SetReferer(string unReferer)
+{
+    referer = unReferer;
+}
+    
+void LogLineReader::SetUserAuthentification(string uneUserAuthentification)
+{
+    userAthentification = uneUserAuthentification;
+}
 
 
 LogLineReader::LogLineReader ( )

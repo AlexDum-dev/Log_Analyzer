@@ -54,16 +54,6 @@ public:
     void SetReferer(string referer);
     void SetUserAuthentification(string userAuthentification);
     
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-     friend istream & operator >> (istream & in, LogLineReader & unLogLineReader);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
 //-------------------------------------------- Constructeurs - destructeur
 
     LogLineReader();

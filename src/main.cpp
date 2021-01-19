@@ -4,19 +4,26 @@
 
 using namespace std;
 
+
+
 int main(int argc, char *argv[])
 {
+    /*
     Statistiques stat;
     LogReader LR(argv[argc-1]);
 
     enleverImages();
     optionHeure();
-
-
-
+    */
+   string str = "test.log";
+   LogReader lr(str);
+   LogLineReader llr = lr.NextLine();
+   cout << llr.GetReferer() << endl;
+   cout << llr.GetCible() << endl;
     return 0;
 }
 
+/*
 //decomposer pour renvoyer des messages d erreur qui decrivent le pb
 
 
@@ -50,3 +57,4 @@ bool optionHeure (){
         return 0;
 
 }
+*/

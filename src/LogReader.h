@@ -11,7 +11,9 @@
 #define LOGREADER_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <string>;
+#include "LogLineReader.h"
+#include "fstream"
+#include <string>
 using namespace std;
 
 //------------------------------------------------------------- Constantes
@@ -31,20 +33,19 @@ class LogReader : public ifstream
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
+    
 	LogLineReader NextLine();
+    //Mode d'emploi : 
+    //
+    //Contrat : 
+    //
     
 
 
 //-------------------------------------------- Constructeurs - destructeur
  
 
-   LogReader(char * nomFichierLog);
+   LogReader(string nomFichierLog);
     // Mode d'emploi :
     //
     // Contrat :
