@@ -45,14 +45,14 @@ public:
     string GetReferer();
     string GetUserAuthentification();
 
-    string SetIp();
-    string SetDateTime();
-    //typeHttp SetTypeRequest();
-    string SetUrl();
-    int SetStatus();
-    int SetQuantity();
-    string SetReferer();
-    string SetUserAuthentification();
+    void SetIp(string ip);
+    void SetDateTime(string dateTime);
+    void SetTypeRequest(string typeRequest);
+    void SetCible(string cible);
+    void SetStatus(int status);
+    void SetQuantity(int quantity);
+    void SetReferer(string referer);
+    void SetUserAuthentification(string userAuthentification);
     
 
 
