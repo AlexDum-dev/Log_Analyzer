@@ -6,7 +6,7 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Xxx> (fichier Xxx.cpp) ------------
+//---------- Réalisation de la classe <LogLineReader> (fichier LogLineReader.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,7 +15,7 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "Xxx.h"
+#include "LogLineReader.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -27,6 +27,90 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+
+string LogLineReader::GetIp()
+{
+    return ip;
+}
+
+string LogLineReader::GetDateTime()
+{
+    return dateTime;
+}
+
+typeHttp LogLineReader::GetTypeRequest()
+{
+    return  typeRequest;
+}
+
+string LogLineReader::GetUrl()
+{
+    return url;
+}
+
+int LogLineReader::GetStatus()
+{
+    return status;
+}
+
+int LogLineReader::GetQuantity()
+{
+    return quantity;
+
+}
+
+string LogLineReader::GetReferer()
+{
+    return referer;
+}
+
+string LogLineReader::GetUserAuthentification()
+{
+    return userAthentification;
+}
+
+//Setters : 
+
+string LogLineReader::SetIp()
+{
+    return ip;
+}
+
+string LogLineReader::SetDateTime()
+{
+    return dateTime;
+}
+
+typeHttp LogLineReader::SetTypeRequest()
+{
+    return  typeRequest;
+}
+
+string LogLineReader::SetUrl()
+{
+    return url;
+}
+
+int LogLineReader::SetStatus()
+{
+    return status;
+}
+
+int LogLineReader::SetQuantity()
+{
+    return quantity;
+
+}
+
+string LogLineReader::SetReferer()
+{
+    return referer;
+}
+
+string LogLineReader::SetUserAuthentification()
+{
+    return userAthentification;
+}
 
 
 //------------------------------------------------- Surcharge d'opérateurs
