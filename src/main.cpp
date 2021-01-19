@@ -1,15 +1,52 @@
-#include "LogLineReader.h"
 #include <iostream>
-#include <fstream>
+#include <cstring>
+#include "LogReader.h"
+
 using namespace std;
 
-int main(){
+int main(int argc, char *argv[])
+{
+    Statistiques stat;
+    LogReader LR(argv[argc-1]);
 
-	LogLineReader lrd;
-	ifstream fic("test.log");
-	fic >> lrd;
-	
-	cout << lrd.GetReferer() << endl;
-	cout << lrd.GetCible() << endl;
-	return 0;
+    enleverImages();
+    optionHeure();
+
+
+
+    return 0;
+}
+
+//decomposer pour renvoyer des messages d erreur qui decrivent le pb
+
+
+bool enleverImages (){
+
+    for (int i=1; i<argc-1; i++){ //rq : argv[0] contient "./main" donc on le compte pas
+
+        if (strcmp(argv[i],"-e") == 0){
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+
+
+bool optionHeure (){
+
+        for (int i=1; i<argc-1; i++){ //rq : argv[0] contient "./main" donc on le compte pas
+
+                        if (stcrmp(argv[i],"-t") == 0){
+
+                                char* aa = argv[i+1]
+                                int heure = aa[0]-'0'; //
+
+                        return 1;
+                        }
+          }
+
+        return 0;
+
 }
