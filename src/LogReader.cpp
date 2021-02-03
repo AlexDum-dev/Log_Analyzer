@@ -31,6 +31,7 @@
 
 LogLineReader LogReader::NextLine()
 {
+    
     LogLineReader res;
     string tmp;
     string urlLocal = "intranet-if.insa-lyon.fr";

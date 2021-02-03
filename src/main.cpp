@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cstring>
-//#include "LogReader.h"
-
+#include "LogReader.h"
+#include "Data.h"
+#include "LogLineReader.h"
 using namespace std;
 
 bool enleverImages(int argc, char* argv[]);
@@ -11,20 +12,41 @@ bool error = false; //Traque erreur
 
 int main(int argc, char *argv[])
 {
-       //Statistiques stat;
-       //LogReader LR(argv[argc-1]);
-       enleverImages(argc, argv);
-       optionHeure(argc, argv);
-       bool generGraph = genererGraph(argc, argv);
+  string nameFicLog(argv[argc-1]);
+  LogReader logReader(nameFicLog);
+  Data data;
 
-       if(error){
-         cout << "Erreur dans la saisie des paramètres, fin du programme." << endl;
-         return 1;
-       }
+  while(!logReader.eof())
+  {
+      LogLineReader llr = logReader.NextLine();
+      if(enleverImages(argc, argv) and llr.GetCible().find(".css") != -1  and llr.GetCible().find(".png") and llr.GetCible().find(".jpg")  and llr.GetCible().find(".svg") and llr.GetCible().find(".js") and llr.GetCible().find(".gif") and llr.GetCible().find(".bmp") and llr.GetCible().find(".tiff") and llr.GetCible().find(".jpeg"))
+      {
+        continue;
+      }
+
+      if(optionHeure(argc, argv) and llr.GetDateTime().substr(llr.GetDateTime().find(":"),llr.GetDateTime().find(":")+2) == "10")
+      {
+        continue;
+      }
+      data.Adapt(llr); //-> adapter le top 10 ainsi que le graphe
+
+
+  }
 
 
 
-        return 0;
+  //Statistiques stat;
+  //LogReader LR(argv[argc-1]);
+  enleverImages(argc, argv);
+  optionHeure(argc, argv);
+  bool generGraph = genererGraph(argc, argv);
+
+ if(error){
+    cout << "Erreur dans la saisie des paramètres, fin du programme." << endl;
+    return 1;
+  }
+ 
+  return 0;
 }
 
 //decomposer pour renvoyer des messages d erreur qui decrivent le pb
