@@ -36,7 +36,7 @@ public:
     // Contrat :
     //
 
-    GenererGraphe ( const Data &d , string nomFichier);
+    void GenererGraphe (Data  d , string nomFichier);
 
 
 //------------------------------------------------- Surcharge d'opérateurs

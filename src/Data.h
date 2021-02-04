@@ -22,13 +22,29 @@ class Data
 //----------------------------------------------------------------- PUBLIC
 
 public:
+
+friend bool cmp(pair<string, int>& a, 
+         pair<string, int>& b); 
+
+friend class DotWriter;
+
 //----------------------------------------------------- Méthodes publiques
+
+    map<string, map<string, int> >  GetGraph();
+    //Mode d'emploi :
+    //
+    //Contrat : 
+    //
 
     void Adapt(LogLineReader llr);
     //Mode d'emploi :
     //
     //Contrat : 
     //
+
+   
+
+    void AfficheTopTen(); //Remplir + trier + afficher
 
  
 //-------------------------------------------- Constructeurs - destructeur
@@ -49,11 +65,17 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-    map<string, map<string, int>> graph;
-    map<string, int> topTen;
+
+
+    void remplirTopTen();
+    //Mode d'emploi : 
+    //Contrat :
+    //
 
 //----------------------------------------------------- Attributs protégés
 
+    map<string, map<string, int> > graph;
+    map<string, int> topTen;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Data>

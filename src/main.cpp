@@ -3,35 +3,55 @@
 #include "LogReader.h"
 #include "Data.h"
 #include "LogLineReader.h"
+#include "DotWriter.h"
 using namespace std;
 
 bool enleverImages(int argc, char* argv[]);
 bool optionHeure(int argc, char* argv[]);
 bool genererGraph(int argc, char* argv[]);
+static int heure;
 bool error = false; //Traque erreur
 
 int main(int argc, char *argv[])
 {
   string nameFicLog(argv[argc-1]);
-  LogReader logReader(nameFicLog);
+  LogReader logReader("test.log");
   Data data;
 
   while(!logReader.eof())
   {
       LogLineReader llr = logReader.NextLine();
-      if(enleverImages(argc, argv) and llr.GetCible().find(".css") != -1  and llr.GetCible().find(".png") and llr.GetCible().find(".jpg")  and llr.GetCible().find(".svg") and llr.GetCible().find(".js") and llr.GetCible().find(".gif") and llr.GetCible().find(".bmp") and llr.GetCible().find(".tiff") and llr.GetCible().find(".jpeg"))
+      if(enleverImages(argc, argv) and (llr.GetCible().find(".css") != string::npos  or llr.GetCible().find(".png")!= string::npos or llr.GetCible().find(".jpg") != string::npos or llr.GetCible().find(".svg") != string::npos or llr.GetCible().find(".js") != string::npos or llr.GetCible().find(".gif") != string::npos or llr.GetCible().find(".bmp") != string::npos or llr.GetCible().find(".tiff") != string::npos or llr.GetCible().find(".jpeg") != string::npos))
+      {
+        continue;
+      }
+      size_t pos = llr.GetDateTime().find(":");
+      string s = llr.GetDateTime().substr(pos+1,2);
+
+      if(optionHeure(argc, argv) and stoi(s) == heure)
       {
         continue;
       }
 
-      if(optionHeure(argc, argv) and llr.GetDateTime().substr(llr.GetDateTime().find(":"),llr.GetDateTime().find(":")+2) == "10")
+      
+      map<string, map<string, int> > l = data.GetGraph();
+      map<string, map<string, int> >::iterator it;
+      map<string, int>::iterator it2;
+
+      for(it = l.begin(); it != l.end();it++)
       {
-        continue;
+            for(it2 = it -> second.begin();it2 != it -> second.end();it2++)
+            {
+              cout << "Referer :" << it -> first << " Cible : " << it2 -> first << " " << it2 -> second << " hits" << endl;
+            }
       }
+
       data.Adapt(llr); //-> adapter le top 10 ainsi que le graphe
-
-
   }
+
+  data.AfficheTopTen();
+  DotWriter d;
+  d.GenererGraphe(data, "fic.dot");
 
 
 
@@ -39,7 +59,7 @@ int main(int argc, char *argv[])
   //LogReader LR(argv[argc-1]);
   enleverImages(argc, argv);
   optionHeure(argc, argv);
-  bool generGraph = genererGraph(argc, argv);
+  //bool generGraph = genererGraph(argc, argv);
 
  if(error){
     cout << "Erreur dans la saisie des paramètres, fin du programme." << endl;
@@ -72,7 +92,7 @@ bool optionHeure (int argc, char* argv[]){
 			if (strcmp(argv[i],"-t") == 0){
 
 				char* aa = argv[i+1];
-				int heure = atoi(aa);
+				heure = atoi(aa);
         cout << heure << endl;
         if(heure >= 24){
           cout << "Erreur : l'heure est trop grande!" << endl;

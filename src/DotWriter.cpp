@@ -11,15 +11,18 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-using namespace std;
+
 #include <iostream>
 #include <cstring> 
-#include <iterator>
+#include <utility>
 #include <vector> 
+#include <map>
+#include <fstream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "DotWriter.h"
-
+#include "Data.h"
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
@@ -31,15 +34,15 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-DotWriter::GenererGraphe ( const Data &d, string nomFichier )
+void DotWriter::GenererGraphe (Data d, string nomFichier )
 {
     ofstream OutputFile(nomFichier.c_str());
     OutputFile << "digraph {" << endl;
-    iterator it = Data.graph.begin();
+    map<string, map<string, int> >::iterator it; // = d.graph.begin();
     unsigned int nbNode = 0;
     vector <string> noeuds;
-
-    for (it = Data.graph.begin(); it != Data.graph.end(); it++)
+    
+    for (it = d.graph.begin(); it != d.graph.end(); it++)
     {
         OutputFile << "node" << nbNode << "[label=\"" << it->first << "\"];" << endl;
         nbNode++;
@@ -47,20 +50,22 @@ DotWriter::GenererGraphe ( const Data &d, string nomFichier )
     }
     
     nbNode = 0;
-
-    for (it = Data.graph.begin(); it != Data.graph.end(); it++)
+    
+    for (it = d.graph.begin(); it != d.graph.end(); it++)
     {
-        iterator it2 = it->second.begin();
+        map<string, int>::iterator it2 = it->second.begin();
         
         for (it2 = it->second.begin(); it2 != it->second.end(); it2++)
         {
             OutputFile << "node" << nbNode << " -> node";
             string cible = it2->first;
             unsigned int node = 0;
+            /*
             while (noeuds.at(node)!=cible)
             {
                 node++;
             }
+            */
             OutputFile << node << " [label=\"" << it2->second << "\"];" << endl;
         } 
         nbNode++;

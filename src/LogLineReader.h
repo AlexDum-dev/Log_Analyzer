@@ -54,6 +54,7 @@ public:
     void SetReferer(string referer);
     void SetUserAuthentification(string userAuthentification);
     
+    
 //-------------------------------------------- Constructeurs - destructeur
 
     LogLineReader();

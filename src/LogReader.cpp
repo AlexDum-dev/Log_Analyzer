@@ -48,9 +48,9 @@ LogLineReader LogReader::NextLine()
     res.SetCible(tmp);
     std::getline(*this,tmp, ' ');
     std::getline(*this,tmp, ' ');
-    res.SetStatus(stoi(tmp));
+    res.SetStatus(std::stoi(tmp));
     std::getline(*this,tmp, '"');
-    res.SetQuantity(stoi(tmp));
+    res.SetQuantity(std::stoi(tmp));
     std::getline(*this, tmp, '/');
     std::getline(*this, tmp, '/');
     std::getline(*this, tmp, '/');
