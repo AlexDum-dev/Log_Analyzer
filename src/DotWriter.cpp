@@ -39,17 +39,33 @@ void DotWriter::GenererGraphe (Data d, string nomFichier )
     ofstream OutputFile(nomFichier.c_str());
     OutputFile << "digraph {" << endl;
     map<string, map<string, int> >::iterator it; // = d.graph.begin();
-    unsigned int nbNode = 0;
-    vector <string> noeuds;
+    map <string, string> sommets;
+    unsigned int numSommet = 0;
     
     for (it = d.graph.begin(); it != d.graph.end(); it++)
     {
-        OutputFile << "node" << nbNode << "[label=\"" << it->first << "\"];" << endl;
-        nbNode++;
-        noeuds.push_back(it->first);
+        map<string, int>::iterator it2 = it->second.begin();
+
+        if (sommets.insert({it->first,"node"+ to_string(numSommet)}).second)
+        {
+            numSommet++;
+        } 
+        
+        for (it2 = it->second.begin(); it2 != it->second.end(); it2++)
+        {
+            if (sommets.insert({it2->first,"node"+ to_string(numSommet)}).second)
+            {
+                numSommet++;
+            } 
+        }
+    }
+
+    map <string, string>::iterator sommet;
+    for (sommet = sommets.begin(); sommet != sommets.end(); sommet++)
+    {
+        OutputFile << sommet->second << " [label=\"" << sommet->first << "\"];" << endl;
     }
     
-    nbNode = 0;
     
     for (it = d.graph.begin(); it != d.graph.end(); it++)
     {
@@ -57,20 +73,11 @@ void DotWriter::GenererGraphe (Data d, string nomFichier )
         
         for (it2 = it->second.begin(); it2 != it->second.end(); it2++)
         {
-            OutputFile << "node" << nbNode << " -> node";
-            string cible = it2->first;
-            unsigned int node = 0;
-            /*
-            while (noeuds.at(node)!=cible)
-            {
-                node++;
-            }
-            */
-            OutputFile << node << " [label=\"" << it2->second << "\"];" << endl;
-        } 
-        nbNode++;
+            OutputFile << sommets[it->first] << " -> " << sommets[it2->first] << " [label=\"" << it2->second << "\"];" << endl;
+        }
 
     }
+    
 
     OutputFile << "}";
 } 

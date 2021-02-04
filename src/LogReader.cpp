@@ -34,7 +34,7 @@ LogLineReader LogReader::NextLine()
     
     LogLineReader res;
     string tmp;
-    string urlLocal = "intranet-if.insa-lyon.fr";
+    string urlLocal = "http://intranet-if.insa-lyon.fr";
     std::getline(*this,tmp, ' ');
     res.SetIp(tmp);
     std::getline(*this,tmp,'[');
@@ -48,23 +48,20 @@ LogLineReader LogReader::NextLine()
     res.SetCible(tmp);
     std::getline(*this,tmp, ' ');
     std::getline(*this,tmp, ' ');
-    res.SetStatus(std::stoi(tmp));
+    res.SetStatus(tmp);
     std::getline(*this,tmp, '"');
-    res.SetQuantity(std::stoi(tmp));
-    std::getline(*this, tmp, '/');
-    std::getline(*this, tmp, '/');
-    std::getline(*this, tmp, '/');
-    if(tmp == urlLocal)
+    res.SetQuantity(tmp);
+
+    std::getline(*this, tmp, '"');
+    cout << "tmp : " << tmp << endl;
+    if(tmp.find(urlLocal) != string::npos)
     {
-        string ref;
-        std::getline(*this, ref, '"');
-        res.SetReferer("/" + ref);
+        size_t position = tmp.find(urlLocal);
+        tmp = tmp.substr(position+urlLocal.size(), tmp.size());
+        res.SetReferer(tmp);
+        
     } else 
     {
-        tmp = "http://" + tmp; //l'adresse n'est pas locale on veut garder tout l'url
-        string tmp2;
-        std::getline(*this,tmp2,'"');
-        tmp = tmp + tmp2;
         res.SetReferer(tmp);
     }
     (*this).get();
@@ -79,7 +76,7 @@ LogLineReader LogReader::NextLine()
 	
 //-------------------------------------------- Constructeurs - destructeur
 
-LogReader::LogReader(string nomFichierLog) : ifstream(nomFichierLog.c_str())
+LogReader::LogReader(const char* nomFichierLog) : ifstream(nomFichierLog)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <LogReader>" << endl;

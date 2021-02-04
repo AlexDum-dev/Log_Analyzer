@@ -45,7 +45,7 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
  
 
-   LogReader(string nomFichierLog);
+   LogReader(const char* nomFichierLog);
     // Mode d'emploi :
     //
     // Contrat :

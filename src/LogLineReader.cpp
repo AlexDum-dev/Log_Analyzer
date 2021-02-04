@@ -44,12 +44,12 @@ string LogLineReader::GetCible()
     return cible;
 }
 
-int LogLineReader::GetStatus()
+string LogLineReader::GetStatus()
 {
     return status;
 }
 
-int LogLineReader::GetQuantity()
+string LogLineReader::GetQuantity()
 {
     return quantity;
 
@@ -89,12 +89,12 @@ void LogLineReader::SetCible(string uneCible)
 }
 
 
-void LogLineReader::SetStatus(int unStatus)
+void LogLineReader::SetStatus(string unStatus)
 {
     status = unStatus;
 }
 
-void LogLineReader::SetQuantity(int uneQuantity)
+void LogLineReader::SetQuantity(string uneQuantity)
 {
     quantity = uneQuantity;
 

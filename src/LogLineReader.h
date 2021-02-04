@@ -40,8 +40,8 @@ public:
     string GetDateTime();
     string GetTypeRequest();
     string GetCible();
-    int GetStatus();
-    int GetQuantity();
+    string GetStatus();
+    string GetQuantity();
     string GetReferer();
     string GetUserAuthentification();
 
@@ -49,8 +49,8 @@ public:
     void SetDateTime(string dateTime);
     void SetTypeRequest(string typeRequest);
     void SetCible(string cible);
-    void SetStatus(int status);
-    void SetQuantity(int quantity);
+    void SetStatus(string status);
+    void SetQuantity(string quantity);
     void SetReferer(string referer);
     void SetUserAuthentification(string userAuthentification);
     
@@ -79,8 +79,8 @@ protected:
     string dateTime;
     string typeRequest;
     string cible;
-    int status;
-    int quantity;
+    string status;
+    string quantity;
     string referer;
     string userAthentification;
 
