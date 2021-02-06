@@ -53,7 +53,6 @@ LogLineReader LogReader::NextLine()
     res.SetQuantity(tmp);
 
     std::getline(*this, tmp, '"');
-    cout << "tmp : " << tmp << endl;
     if(tmp.find(urlLocal) != string::npos)
     {
         size_t position = tmp.find(urlLocal);
