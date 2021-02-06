@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
   catch(exception const& e)
   {
     cerr << e.what()<< endl;
+    return -1;
   }
 
   try
@@ -33,13 +34,14 @@ int main(int argc, char *argv[])
   catch(const exception& e)
   {
     cerr << e.what() << endl;
+    return -1;
   }
   
   LogReader logReader(argv[argc-1]);
   if(!logReader)
   {
     cerr << "Erreur : saisie incorrecte du nom de fichier log" << endl;
-    return 1;
+    return -1;
   }
 
   Data data;
@@ -142,6 +144,3 @@ bool genererGraph (int argc, char* argv[]){
 
 	return 0;
 }
-
-}
-
