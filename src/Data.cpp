@@ -14,8 +14,7 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Data.h"
 
-bool cmp(pair<string, int>& a, 
-         pair<string, int>& b)
+bool cmp(pair<string, int>& a, pair<string, int>& b)
 { 
     return a.second > b.second; 
 } 
