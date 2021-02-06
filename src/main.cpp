@@ -4,24 +4,49 @@
 #include "Data.h"
 #include "LogLineReader.h"
 #include "DotWriter.h"
+#include "Erreur.h"
 using namespace std;
 
 bool enleverImages(int argc, char* argv[]);
 bool optionHeure(int argc, char* argv[]);
 bool genererGraph(int argc, char* argv[]);
+void AnalyseLog(int argc, char * argv[]);
 static int heure;
 static char* nomGraph;
 bool error = false; //Traque erreur
 
 int main(int argc, char *argv[])
 {
+  try
+  {
+    genererGraph(argc, argv);
+  }
+  catch(exception const& e)
+  {
+    cerr << e.what()<< endl;
+  }
+
+  try
+  {
+    optionHeure(argc, argv);
+  }
+  catch(const exception& e)
+  {
+    cerr << e.what() << endl;
+  }
+  
   LogReader logReader(argv[argc-1]);
+  if(!logReader)
+  {
+    cerr << "Erreur : saisie incorrecte du nom de fichier log" << endl;
+    return 1;
+  }
+
   Data data;
 
   while(!logReader.eof())
   {
       LogLineReader llr = logReader.NextLine();
-      //cout << llr.GetReferer() << endl;
       if(enleverImages(argc, argv) and (llr.GetCible().find(".css") != string::npos  or llr.GetCible().find(".png")!= string::npos or llr.GetCible().find(".jpg") != string::npos or llr.GetCible().find(".svg") != string::npos or llr.GetCible().find(".js") != string::npos or llr.GetCible().find(".gif") != string::npos or llr.GetCible().find(".bmp") != string::npos or llr.GetCible().find(".tiff") != string::npos or llr.GetCible().find(".jpeg") != string::npos))
       {
         continue;
@@ -58,21 +83,6 @@ int main(int argc, char *argv[])
     string nom(nomGraph);
     d.GenererGraphe(data, nom);
   } 
-  
-
-
-
-  //Statistiques stat;
-  //LogReader LR(argv[argc-1]);
-  enleverImages(argc, argv);
-  optionHeure(argc, argv);
-  //bool generGraph = genererGraph(argc, argv);
-
- if(error){
-    cout << "Erreur dans la saisie des paramètres, fin du programme." << endl;
-    return 1;
-  }
- 
   return 0;
 }
 
@@ -100,10 +110,8 @@ bool optionHeure (int argc, char* argv[]){
 
 				char* aa = argv[i+1];
 				heure = atoi(aa);
-        cout << heure << endl;
         if(heure >= 24){
-          cout << "Erreur : l'heure est trop grande!" << endl;
-          error = true;
+          throw Erreur(1, "Erreur : l'heure est trop grande!", 1);
           return 0;
         }
         else
@@ -125,9 +133,7 @@ bool genererGraph (int argc, char* argv[]){
         int size=0;
         while(nomGraph[size]!='\0') size++; //Compte nombre caractère
         if(nomGraph[size-1]!='t' && nomGraph[size-2]!='o' && nomGraph[size-3]!='d' && nomGraph[size-4]!='.'){
-          error = true;
-          cout << "Erreur, le fichier graph ne porte pas la bonne extension (.dot)." << endl;
-          return 0;
+          throw Erreur(0,"Erreur, le fichier graph ne porte pas la bonne extension (.dot).",1); 
         }
         //cout << "Taille : " << size << endl;
 			  return 1;
@@ -136,3 +142,6 @@ bool genererGraph (int argc, char* argv[]){
 
 	return 0;
 }
+
+}
+
