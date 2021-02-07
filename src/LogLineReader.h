@@ -20,7 +20,7 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <LogLineReader>
-//
+// Cette classe représente une ligne de log en la décomposant selon ses différents attributs. Classe générale, réutilisable.
 //
 //------------------------------------------------------------------------
 
@@ -31,10 +31,8 @@ class LogLineReader
 public:
 //----------------------------------------------------- Méthodes publiques
     // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Mode d'emploi : getters et setters, pour accéder aux attributs ou les modifier de l'extérieur de la classe.
+    
 
     string GetIp();
     string GetDateTime();
@@ -58,21 +56,16 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 
     LogLineReader();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Mode d'emploi : constructeur
+
 
     virtual ~LogLineReader ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Mode d'emploi : destructeur
+  
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
     string ip;
@@ -86,7 +79,7 @@ protected:
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Xxx>
+//-------------------------------- Autres définitions dépendantes de <LogLineReader>
 
 #endif // LogLineReader_H
 

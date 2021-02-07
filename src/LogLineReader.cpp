@@ -105,8 +105,7 @@ void LogLineReader::SetUserAuthentification(string uneUserAuthentification)
 
 
 LogLineReader::LogLineReader ( )
-// Algorithme :
-//
+
 {
 #ifdef MAP
     cout << "Appel au constructeur de <LogLineReader>" << endl;
@@ -115,13 +114,12 @@ LogLineReader::LogLineReader ( )
 
 
 LogLineReader::~LogLineReader ( )
-// Algorithme :
-//
+
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Xxx>" << endl;
 #endif
-} //----- Fin de ~Xxx
+} //----- Fin de ~LogLineReader
 
 
 //------------------------------------------------------------------ PRIVE
