@@ -13,7 +13,7 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Data>
-//
+// La classe Data contient les informations contenues dans les fichiers log.
 //
 //------------------------------------------------------------------------
 
@@ -23,41 +23,46 @@ class Data
 
 public:
 
-friend bool cmp(pair<string, int>& a, 
-         pair<string, int>& b); 
+    friend bool cmp ( pair <string, int> & a, pair <string, int> & b ) ; 
 
-friend class DotWriter;
+    friend class DotWriter;
 
 //----------------------------------------------------- Méthodes publiques
 
-    map<string, map<string, int> >  GetGraph();
-    //Mode d'emploi :
-    //
-    //Contrat : 
-    //
+    map <string, map<string, int> > GetGraph ( ) ;
+    // Mode d'emploi :
+    // La méthode GetGraph() renvoie l'attribut graph de l'objet invoquant
+    // la méthode. Cette méthode est notamment utile pour la classe DotWriter
+    // Contrat : 
+    // Aucun contrat.
 
-    void Adapt(LogLineReader llr);
-    //Mode d'emploi :
-    //
-    //Contrat : 
-    //
+    void Adapt ( LogLineReader llr ) ;
+    // Mode d'emploi :
+    // La méthode Adapt permet de modifier l'attribut graph de l'objet invoquant
+    // la méthode avec un LogLineReader passé en paramètre. 
+    // Contrat : 
+    // Aucun contrat.
 
    
 
-    void AfficheTopTen(); //Remplir + trier + afficher
+    void AfficheTopTen ( ) ; //Remplir + trier + afficher
+    // Mode d'emploi :
+    // Cette méthode remplit, trie et affiche l'attribut topTen de l'objet invoquant
+    // la méthode
+    // Contrat : Aucun contrat.
 
  
 //-------------------------------------------- Constructeurs - destructeur
 
     Data ( );
     // Mode d'emploi :
-    //
+    // Contruit un objet de type Data vide.
     // Contrat :
     //
 
-    virtual ~Data( );
+    virtual ~Data ( );
     // Mode d'emploi :
-    //
+    // Détruit l'objet Data.
     // Contrat :
     //
 
@@ -67,10 +72,12 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 
-    void remplirTopTen();
-    //Mode d'emploi : 
-    //Contrat :
-    //
+    void remplirTopTen ( ) ;
+    // Mode d'emploi : 
+    // Cette méthode remplit l'attribut topTen de l'objet invoquant
+    // la méthode.
+    // Contrat :
+    // Aucun contrat.
 
 //----------------------------------------------------- Attributs protégés
 

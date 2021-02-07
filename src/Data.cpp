@@ -14,19 +14,20 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Data.h"
 
-bool cmp(pair<string, int>& a, pair<string, int>& b)
-{ 
-    return a.second > b.second; 
-} 
-
-map<string, map<string, int> > Data::GetGraph()
+map<string, map<string, int> > Data::GetGraph ( )
 {
     return graph;
-}
+} //----- Fin de GetGraph
 
-void Data::Adapt(LogLineReader llr)
+void Data::Adapt ( LogLineReader llr )
+// Algorithme :
+// Si le referer existe faire:
+//     incrémenter();
+// Sinon faire
+//     créer();
+// 
 {
-    //Adaptation du graphe : 
+    //Adaptation du graphe :
     if(graph[llr.GetReferer()].find(llr.GetCible()) != graph[llr.GetReferer()].end()) //s'il ne trouve pas alors find renvoie une itérateur sur end
     {
         graph[llr.GetReferer()][llr.GetCible()] =  graph[llr.GetReferer()][llr.GetCible()] + 1; //s'il exite déjà l'arête alors on incrémente le poids
@@ -34,16 +35,21 @@ void Data::Adapt(LogLineReader llr)
     {
         graph[llr.GetReferer()].insert({llr.GetCible(), 1}); //Dans le cas où il n'y a pas l'arête, je la créée
     }
-}
+} //----- Fin de Adapt
 
 
 
 
-void Data::AfficheTopTen()
+void Data::AfficheTopTen ( )
+// Algorithme :
+// remplir();
+// Pour chaque élément du graphe faire
+//     insérer la paire dans un vecteur
+// trier le vecteur;
+// afficher();
 {
     remplirTopTen();
    
-   //Sort using a vector : 
     vector<pair<string, int> > tmp; 
     map<string,int>::iterator it;
     for (it = topTen.begin(); it != topTen.end(); it++) { 
@@ -58,12 +64,14 @@ void Data::AfficheTopTen()
     {
         cout << tmp[i].first << " (" << tmp[i].second << " hits)" << endl; 
     }
-}
+} //----- Fin de AfficheTopTen
+
+
 //----------------------------------------------------------------- PUBLIC
 
 //-------------------------------------------- Constructeurs - destructeur
 
-Data::Data ()
+Data::Data ( )
 // Algorithme :
 //
 {
@@ -87,7 +95,15 @@ Data::~Data ( )
 
 //----------------------------------------------------- Méthodes protégées
 
-void Data::remplirTopTen()
+void Data::remplirTopTen ( )
+// Algorithme :
+// Pour chaque referer faire
+//     Pour chaque cible faire :
+//         Si la cible est présente dans le topTen faire :
+//             incrémenter du nombre de hits;
+//         Sinon faire:
+//             insérer la cible dans le topTen;
+// Fin
 {
     map<string,map<string,int> >::iterator it;
     map<string,int>::iterator it2;
@@ -100,9 +116,13 @@ void Data::remplirTopTen()
                 topTen[it2->first] += it2 -> second;
             } else
             {
-                //topTen.insert(*it2);
                 topTen.insert({it2->first,it2->second});
             }
         }
     }
 }
+
+bool cmp(pair<string, int>& a, pair<string, int>& b)
+{ 
+    return a.second > b.second; 
+} 
