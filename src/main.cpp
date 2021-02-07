@@ -11,6 +11,7 @@ bool enleverImages(int argc, char* argv[]);
 bool optionHeure(int argc, char* argv[]);
 bool genererGraph(int argc, char* argv[]);
 void AnalyseLog(int argc, char * argv[]);
+void analyseNameLog(int  argc,char * argv[]);
 static int heure;
 static char* nomGraph;
 bool error = false; //Traque erreur
@@ -36,9 +37,19 @@ int main(int argc, char *argv[])
     cerr << e.what() << endl;
     return -1;
   }
+
+  try
+  {
+    analyseNameLog(argc, argv);
+  }
+  catch(const std::exception& e)
+  {
+    cerr << e.what() << endl;
+    return -1;
+  }
   
   LogReader logReader(argv[argc-1]);
-  if(!logReader)
+  if(!logReader) //teste si le fichier existe ou peut s'ouvrir
   {
     cerr << "Erreur : saisie incorrecte du nom de fichier log" << endl;
     return -1;
@@ -112,10 +123,16 @@ bool optionHeure (int argc, char* argv[]){
 
 				char* aa = argv[i+1];
 				heure = atoi(aa);
-        if(heure >= 24){
+        if(heure > 23 or heure < 0){
           throw Erreur(1, "Erreur : l'heure est trop grande!", 1);
           return 0;
         }
+
+        if (((strlen(aa) == 1) and (aa[0] < 48 or aa[0] > 57)) or ((strlen(aa) > 1) and (aa[0] < 48 or aa[0] > 57 or aa[1] < 48 or aa[1] > 57)) or (strlen(aa) > 2))
+        {
+          throw Erreur(1,"Erreur : l'heure est invalide", 1);
+        }
+        
         else
         	return 1;
 			}
@@ -143,4 +160,14 @@ bool genererGraph (int argc, char* argv[]){
 	  }
 
 	return 0;
+}
+
+void analyseNameLog(int  argc,char * argv[])
+{
+  int taille = strlen(argv[argc-1]);
+
+  if(taille <= 4 or argv[argc-1][taille-1] != 'g' or argv[argc-1][taille-2] != 'o' or argv[argc-1][taille-3] != 'l' or argv[argc-1][taille-4] != '.')
+  {
+  throw Erreur(3, "Erreur : saisie incorrecte du nom de fichier log",1);
+  }
 }
