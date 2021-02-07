@@ -1,0 +1,1 @@
+../../bin/main -e -g fic.dot -t 11 ../../bin/testAll.log
