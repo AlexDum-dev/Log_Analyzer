@@ -1,1 +1,1 @@
-Ce test permet de vérifier la production d'un fichier en sortie du programme testé
+Test sans option avec nom de fichier log : doit afficher le top 10

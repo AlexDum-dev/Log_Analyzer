@@ -34,7 +34,7 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-void DotWriter::GenererGraphe (Data d, string nomFichier )
+void DotWriter::GenererGraphe (Data d, string nomFichier)
 {
     ofstream OutputFile(nomFichier.c_str());
     OutputFile << "digraph {" << endl;

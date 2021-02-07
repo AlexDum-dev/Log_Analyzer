@@ -1,1 +1,1 @@
-cat 
+../../bin/main -g ../../bin/test.log 
