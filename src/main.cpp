@@ -16,10 +16,10 @@ void testOption (int argc, char* argv[]);
 
 static int heure;
 static char* nomGraph;
-bool error = false; //Traque erreur
 
 int main(int argc, char *argv[])
 {
+  //Test sur le fichier dot
   try
   {
     genererGraph(argc, argv);
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     cerr << e.what()<< endl;
     return -1;
   }
-
+  //Test sur le paramètre heure de l'utilisateur 
   try
   {
     optionHeure(argc, argv);
@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
     return -1;
   }
 
+  //Test sur le nom de fichier log
   try
   {
     analyseNameLog(argc, argv);
@@ -50,6 +51,7 @@ int main(int argc, char *argv[])
     return -1;
   }
 
+  //Test si une option non autorisée a été donnée en paramètre
   try
   {
     testOption(argc, argv);
@@ -69,35 +71,21 @@ int main(int argc, char *argv[])
 
   Data data;
 
-  while(!logReader.eof())
+  while(!logReader.eof()) //lit le fichier log
   {
       LogLineReader llr = logReader.NextLine();
       if(enleverImages(argc, argv) and (llr.GetCible().find(".css") != string::npos  or llr.GetCible().find(".png")!= string::npos or llr.GetCible().find(".jpg") != string::npos or llr.GetCible().find(".svg") != string::npos or llr.GetCible().find(".js") != string::npos or llr.GetCible().find(".gif") != string::npos or llr.GetCible().find(".bmp") != string::npos or llr.GetCible().find(".tiff") != string::npos or llr.GetCible().find(".jpeg") != string::npos))
       {
-        continue;
+        continue; //on passe à l'itération suivante si on l'option -e et que la ligne comporte des extensions qu'on veut enlever
       }
+
       size_t pos = llr.GetDateTime().find(":");
       string s = llr.GetDateTime().substr(pos+1,2);
 
       if(optionHeure(argc, argv) and stoi(s) != heure)
       {
-        continue;
+        continue; //passe à  l'itération suivante si on est pas dans l'intervalle d'heure demandé
       }
-
-      /*
-      map<string, map<string, int> > l = data.GetGraph();
-      map<string, map<string, int> >::iterator it;
-      map<string, int>::iterator it2;
-
-      for(it = l.begin(); it != l.end();it++)
-      {
-            for(it2 = it -> second.begin();it2 != it -> second.end();it2++)
-            {
-              cout << "Referer :" << it -> first << " Cible : " << it2 -> first << " " << it2 -> second << " hits" << endl;
-            }
-      }
-      */
-
       data.Adapt(llr); //-> adapter le top 10 ainsi que le graphe
   }
 
@@ -111,11 +99,10 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-//decomposer pour renvoyer des messages d erreur qui decrivent le pb
 
-
-bool enleverImages (int argc, char* argv[]){
-
+bool enleverImages (int argc, char* argv[])
+//Renvoie si l'option -e a été activée
+{
 	 for (int i=1; i<argc-1; i++){ //rq : argv[0] contient "./main" donc on le compte pas
 
 			if (strcmp(argv[i],"-e") == 0){
@@ -128,8 +115,10 @@ bool enleverImages (int argc, char* argv[]){
 
 
 
-bool optionHeure (int argc, char* argv[]){
-
+bool optionHeure (int argc, char* argv[])
+//Analyse le paramètre heurre
+//throw une erreur si l'heure est trop grande ou s'il s'agit d'une heure invalide ("aa" par exemple )
+{
 	for (int i=1; i<argc-1; i++){ //rq : argv[0] contient "./main" donc on le compte pas
 			if (strcmp(argv[i],"-t") == 0){
 
@@ -154,8 +143,10 @@ bool optionHeure (int argc, char* argv[]){
 
 }
 
-bool genererGraph (int argc, char* argv[]){
-
+bool genererGraph (int argc, char* argv[])
+//Analyse le nom du fichier 
+//throw une erreur dans le cas ou l'extension n'est pas bonne ou nom non conforme
+{
 	 for (int i=1; i<argc-1; i++){ //rq : argv[0] contient "./main" donc on le compte pas
 
 			if (strcmp(argv[i],"-g") == 0){
@@ -173,6 +164,8 @@ bool genererGraph (int argc, char* argv[]){
 }
 
 void analyseNameLog(int  argc,char * argv[])
+//Anlyse le nom de fichier log
+//throw une erreur si l'extension ou si le fichier n'existe pas
 {
   int taille = strlen(argv[argc-1]);
 
@@ -183,6 +176,8 @@ void analyseNameLog(int  argc,char * argv[])
 }
 
 void testOption (int argc, char* argv[])
+// Fonction qui analyse si des options non autorisées ont eté fournies :
+// throw une erreur dans le cas ou un option non autorisée a été fournie
 {
     bool param = false;
 

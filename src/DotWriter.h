@@ -1,11 +1,3 @@
-/*************************************************************************
-                           DotWriter  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
 //---------- Interface de la classe <DotWriter> (fichier DotWriter.h) ----------------
 #if ! defined ( DOTWRITER_H )
 #define DOTWRITER_H
@@ -14,14 +6,12 @@
 #include <cstring> 
 #include"Data.h" 
 
-//------------------------------------------------------------- Constantes
 
-//------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
 // Rôle de la classe <DotWriter>
-//
-//
+// Classe permettant d'écrire dans une fichier .dot (avec un syntaxe précise)
+// un graphe.
 //------------------------------------------------------------------------
 
 class DotWriter
@@ -30,13 +20,11 @@ class DotWriter
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
+ 
     void GenererGraphe (Data  d , string nomFichier);
+    //Mode d'emploi : 
+    //Permet d'écrire dans un fichier .dot le graphe attribut du paramètre d type data  
+    //
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -45,17 +33,9 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 
     DotWriter ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    
 
     virtual ~DotWriter ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 //------------------------------------------------------------------ PRIVE
 
 protected:

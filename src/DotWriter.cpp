@@ -1,11 +1,3 @@
-/*************************************************************************
-                           DotWriter  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
 //---------- Réalisation de la classe <DotWriter> (fichier DotWriter.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
@@ -23,18 +15,16 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "DotWriter.h"
 #include "Data.h"
-//------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 void DotWriter::GenererGraphe (Data d, string nomFichier)
+//Algorithme : 
+//Itère sur tous les referer et cible de la map pour les ajouter commme noeud dans le fichier dot
+//Puis itère sur tous les referer pour trouver à quelle cible il est lié et quel est le poids de cette arête
+//Respecte la syntaxe précise d'un fichier .dot
 {
     ofstream OutputFile(nomFichier.c_str());
     OutputFile << "digraph {" << endl;
@@ -88,9 +78,7 @@ void DotWriter::GenererGraphe (Data d, string nomFichier)
 
 //-------------------------------------------- Constructeurs - destructeur
 
-DotWriter::DotWriter ( )
-// Algorithme :
-//
+DotWriter::DotWriter ()
 {
 #ifdef MAP
     cout << "Appel au constructeur de <DotWriter>" << endl;
@@ -106,9 +94,3 @@ DotWriter::~DotWriter ( )
     cout << "Appel au destructeur de <DotWriter>" << endl;
 #endif
 } //----- Fin de ~DotWriter
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées
-
