@@ -31,48 +31,48 @@
 
 LogLineReader LogReader::NextLine()
 {
-    
+
     LogLineReader res;
     string tmp;
-    string urlLocal = "http://intranet-if.insa-lyon.fr";
-    std::getline(*this,tmp, ' ');
+    string urlLocal = "http://intranet-if.insa-lyon.fr"; //URL locale
+    std::getline(*this,tmp, ' '); //Récupère l'adresse IP du client émetteur
     res.SetIp(tmp);
-    std::getline(*this,tmp,'[');
-    std::getline(*this,tmp, ']');
+    std::getline(*this,tmp,'['); //Avance jusqu'à la date
+    std::getline(*this,tmp, ']'); //Récupère la date et l'heure de la requête
     res.SetDateTime(tmp);
-    (*this).get();
-    (*this).get();
-    std::getline(*this,tmp, ' ');
+    (*this).get(); //Avance pointeur
+    (*this).get(); //Avance pointeur
+    std::getline(*this,tmp, ' '); //Récupère type requête
     res.SetTypeRequest(tmp);
-    std::getline(*this,tmp, ' ');
+    std::getline(*this,tmp, ' '); //Récupère cible
     res.SetCible(tmp);
     std::getline(*this,tmp, '"');
-    std::getline(*this,tmp, ' ');
+    std::getline(*this,tmp, ' '); //Récupère code status
     res.SetStatus(tmp);
-    std::getline(*this,tmp, '"');
+    std::getline(*this,tmp, '"'); //Récupère quantité de données transférées au serveur
     res.SetQuantity(tmp);
 
-    std::getline(*this, tmp, '"');
+    std::getline(*this, tmp, '"'); //Récupère referer
     if(tmp.find(urlLocal) != string::npos)
     {
         size_t position = tmp.find(urlLocal);
         tmp = tmp.substr(position+urlLocal.size(), tmp.size());
         res.SetReferer(tmp);
-        
-    } else 
+
+    } else
     {
         res.SetReferer(tmp);
     }
     (*this).get();
     (*this).get();
-    std::getline(*this, tmp, '"');
+    std::getline(*this, tmp, '"'); //Récupère l’identification du client navigateur
     res.SetUserAuthentification(tmp);
     (*this).get(); //consomme le retour à la ligne
 
     return res;
 }
 
-	
+
 //-------------------------------------------- Constructeurs - destructeur
 
 LogReader::LogReader(const char* nomFichierLog) : ifstream(nomFichierLog)
@@ -96,4 +96,3 @@ LogReader::~LogReader ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

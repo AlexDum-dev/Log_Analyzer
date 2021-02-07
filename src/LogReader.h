@@ -22,8 +22,9 @@ using namespace std;
 
 
 //------------------------------------------------------------------------
-// Rôle de la classe <LogLineReader>
-//
+// Rôle de la classe <LogReader>
+// Classe objet, gère la création des LogLineReader et l'initialisation de ses
+// attributs en passant pas les setters
 //
 //------------------------------------------------------------------------
 
@@ -33,28 +34,28 @@ class LogReader : public ifstream
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    
+
 	LogLineReader NextLine();
-    //Mode d'emploi : 
+    //Mode d'emploi :
+    // Créer un object LogLineReder et initialise ses attributs. Retourne l'object crée dans le main
+    //Contrat : sans
     //
-    //Contrat : 
-    //
-    
+
 
 
 //-------------------------------------------- Constructeurs - destructeur
- 
+
 
    LogReader(const char* nomFichierLog);
     // Mode d'emploi :
-    //
-    // Contrat :
+    // Constructeurs de l'object LogReader, prend en entrée le nom du fichier à analyser et l'ouvre avec ifstream
+    // Contrat : sans
     //
 
     virtual ~LogReader ( );
     // Mode d'emploi :
-    //
-    // Contrat :
+    // Detructeur de LogReader
+    // Contrat : sans
     //
 
 //------------------------------------------------------------------ PRIVE
@@ -64,10 +65,9 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 
-    
+
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>
 
 #endif // LogReader_H
-
