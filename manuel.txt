@@ -1,0 +1,29 @@
+Ce programme permet d'analyser des logs Apache et d'en extraire des statistiques sur les
+sites les plus visités.
+Selon l'option spécifiée, le programme génère un top 10 des sites les plus visités, et un graphe 
+montrant les connexions si le paramètre est renseigné.
+
+#Commande de base
+./main [Options] nomLog.log
+
+#Options possibles
+
+	-g [nomGraph.dot] --> génère fichier .dot, montrant les connexions. On remarquera que 
+				celui-ci est indisponible si le log est trop long.
+
+	-e --> ignore les fichiers images (.png, .css, .jpg, .gif, .tiff, .jpeg, .js, .bmp)
+
+	-t [heure] --> Ne récupère les logs que sur une période heure, heure + 1
+
+#Erreurs identifiées
+
+* "nomGraph" ne porte pas l'extension .dot
+* l'heure fournie est invalide (supérieure à 23, inférieure à 0, ou pas un nombre)
+* le fichier .log est invalide (pas d'extension ou fichier introuvable)
+* nom de fichier non spécifié (pour log ou graphe)
+* paramètres invalides (mauvais format)
+
+#Sorties
+* TOP 10 sur stdout
+* Si -g en paramètre, génère un .dot
+

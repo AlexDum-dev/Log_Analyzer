@@ -1,1 +1,1 @@
-../../bin/main -t 11 ../../bin/test.log
+../../bin/main -t 10 ../../bin/test.log

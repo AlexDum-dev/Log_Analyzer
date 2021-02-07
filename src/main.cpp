@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
       size_t pos = llr.GetDateTime().find(":");
       string s = llr.GetDateTime().substr(pos+1,2);
 
-      if(optionHeure(argc, argv) and stoi(s) == heure)
+      if(optionHeure(argc, argv) and stoi(s) != heure)
       {
         continue;
       }
