@@ -12,6 +12,8 @@ bool optionHeure(int argc, char* argv[]);
 bool genererGraph(int argc, char* argv[]);
 void AnalyseLog(int argc, char * argv[]);
 void analyseNameLog(int  argc,char * argv[]);
+void testOption (int argc, char* argv[]);
+
 static int heure;
 static char* nomGraph;
 bool error = false; //Traque erreur
@@ -45,6 +47,16 @@ int main(int argc, char *argv[])
   catch(const std::exception& e)
   {
     cerr << e.what() << endl;
+    return -1;
+  }
+
+  try
+  {
+    testOption(argc, argv);
+  }
+  catch(exception const& e)
+  {
+    cerr << e.what()<< endl;
     return -1;
   }
   
@@ -168,4 +180,20 @@ void analyseNameLog(int  argc,char * argv[])
   {
   throw Erreur(3, "Erreur : saisie incorrecte du nom de fichier log",1);
   }
+}
+
+void testOption (int argc, char* argv[])
+{
+    bool param = false;
+
+     for (int i=1; i<argc-1; i++){ //rq : argv[0] contient "./main" donc on le compte pas
+
+        if (strcmp(argv[i],"-g") != 0 && strcmp(argv[i],"-e") != 0 && strcmp(argv[i],"-t") != 0 && !param){
+          throw Erreur(0,"Erreur, mauvais paramètre en entrée",1);
+      }
+        param = false;
+        if(strcmp(argv[i],"-g") == 0 || strcmp(argv[i],"-t") == 0){
+            param = true;
+        }
+      }
 }
