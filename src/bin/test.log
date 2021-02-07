@@ -1,26 +1,10 @@
-digraph {
-node0 [label="-"];
-node2 [label="/temps/"];
-node4 [label="/temps/3IF37.html"];
-node5 [label="/temps/3IF38.html"];
-node6 [label="/temps/4IF15.html"];
-node7 [label="/temps/4IF16.html"];
-node8 [label="/temps/4IF17.html"];
-node9 [label="/temps/4IF18.html"];
-node10 [label="/temps/4IF19.html"];
-node11 [label="/temps/4IF20.html"];
-node12 [label="/temps/FondInsa.jpg"];
-node1 [label="/temps/InsaIF.ico"];
-node3 [label="/temps/style_emploi_du_temps.css"];
-node13 [label="http://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0CDIQFjAB&url=http%3A%2F%2Fintranet-if.insa-lyon.fr%2Ftemps%2F&ei=_wxLUKCwEMaJhQe08oCYCw&usg=AFQjCNEWrHsRdIlhli_31qYl94w-yMCjpw&sig2=eTdZgqmz8aDAi5eiWxEP1g"];
-node0 -> node1 [label="1"];
-node2 -> node3 [label="1"];
-node4 -> node5 [label="1"];
-node6 -> node7 [label="1"];
-node7 -> node8 [label="1"];
-node8 -> node9 [label="1"];
-node9 -> node10 [label="1"];
-node10 -> node11 [label="1"];
-node3 -> node12 [label="1"];
-node13 -> node2 [label="1"];
-}
+192.168.0.0 - - [08/Sep/2012:11:16:02 +0200] "GET /temps/4IF16.html HTTP/1.1" 200 12106 "http://intranet-if.insa-lyon.fr/temps/4IF15.html" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1"
+192.168.0.0 - - [08/Sep/2012:11:16:05 +0200] "GET /temps/4IF17.html HTTP/1.1" 200 5189 "http://intranet-if.insa-lyon.fr/temps/4IF16.html" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1"
+192.168.0.0 - - [08/Sep/2012:11:16:06 +0200] "GET /temps/4IF18.html HTTP/1.1" 200 5192 "http://intranet-if.insa-lyon.fr/temps/4IF17.html" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1"
+192.168.0.0 - - [08/Sep/2012:11:16:06 +0200] "GET /temps/4IF19.html HTTP/1.1" 200 5179 "http://intranet-if.insa-lyon.fr/temps/4IF18.html" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1"
+192.168.0.0 - - [08/Sep/2012:11:16:07 +0200] "GET /temps/4IF20.html HTTP/1.1" 200 5185 "http://intranet-if.insa-lyon.fr/temps/4IF19.html" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1"
+192.168.0.1 - - [08/Sep/2012:11:16:08 +0200] "GET /temps/3IF38.html HTTP/1.1" 200 21722 "http://intranet-if.insa-lyon.fr/temps/3IF37.html" "Mozilla/5.0 (Linux; U; Android 2.3.5; fr-fr; HTC Desire S Build/GRJ90) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+192.168.0.2 - - [08/Sep/2012:11:16:51 +0200] "GET /temps/ HTTP/1.1" 200 6835 "http://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0CDIQFjAB&url=http%3A%2F%2Fintranet-if.insa-lyon.fr%2Ftemps%2F&ei=_wxLUKCwEMaJhQe08oCYCw&usg=AFQjCNEWrHsRdIlhli_31qYl94w-yMCjpw&sig2=eTdZgqmz8aDAi5eiWxEP1g" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0.1"
+192.168.0.2 - - [08/Sep/2012:11:16:51 +0200] "GET /temps/style_emploi_du_temps.css HTTP/1.1" 200 1216 "http://intranet-if.insa-lyon.fr/temps/" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0.1"
+192.168.0.2 - - [08/Sep/2012:11:16:51 +0200] "GET /temps/InsaIF.ico HTTP/1.1" 200 766 "-" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0.1"
+192.168.0.2 - - [08/Sep/2012:11:16:51 +0200] "GET /temps/FondInsa.jpg HTTP/1.1" 200 2828 "http://intranet-if.insa-lyon.fr/temps/style_emploi_du_temps.css" "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:15.0) Gecko/20100101 Firefox/15.0.1"

@@ -150,7 +150,7 @@ bool genererGraph (int argc, char* argv[]){
         nomGraph = argv[i+1];
         int size=0;
         while(nomGraph[size]!='\0') size++; //Compte nombre caractère
-        if(nomGraph[size-1]!='t' or nomGraph[size-2]!='o' or nomGraph[size-3]!='d' or nomGraph[size-4]!='.'){
+        if( size < 4 or nomGraph[size-1]!='t' or nomGraph[size-2]!='o' or nomGraph[size-3]!='d' or nomGraph[size-4]!='.'){
           throw Erreur(0,"Erreur, le fichier graph ne porte pas la bonne extension (.dot)",1); 
         }
 			  return 1;
